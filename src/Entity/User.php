@@ -146,14 +146,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getConntact(): ?string
+    public function getContact(): ?string
     {
         return $this->contact;
     }
 
-    public function setConntact(string $conntact): static
+    public function setContact(string $contact): static
     {
-        $this->contact = $conntact;
+        $this->contact = $contact;
 
         return $this;
     }
