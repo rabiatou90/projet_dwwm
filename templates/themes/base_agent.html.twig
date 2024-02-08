@@ -67,24 +67,38 @@
 							<a class="nav-link active" aria-current="page" href="{{path('agent_welcome_index')}}">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{path('agent_transfert_index')}}">Transfert</a>
-						</li>
-						<li class="nav-item">
 							<a class="nav-link" href="#">Qui sommes-nous?</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('agent_transfert_index')}}">Transfert</a>
+						</li>
+						
 						<li class="nav-item">
 							<a class="nav-link" href="{{path('agent_contact_index')}}">Contact</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav ms-auto">
-							<li class="nav-item">
-								<a class="nav-link" href="#">inscription</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Connexion</a>
-							</li>
-						
-					</ul>
+                    {% if app.user %}
+                        {# Si un utilisateur est connecté #}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            {# Si l'utilisateur est administrateur #}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('agent_authentification_register') }}">Inscription</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        {# Si aucun utilisateur n'est connecté #}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('agent_authentification_login') }}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('agent_authentification_register') }}">Inscription</a>
+                        </li>
+                    {% endif %}
+                </ul>
 				</div>
 			</div>
 		</nav>
