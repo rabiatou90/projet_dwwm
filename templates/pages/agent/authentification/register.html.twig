@@ -86,7 +86,6 @@
 								<div class="text-danger">{{ form_errors(form.email) }}</div>
 							</div>
 
-
 							<div class="mb-3">
 								<label for="registration_form_roles" class="form-label">Rôles</label>
 								<button class="toggle-roles btn btn-primary mt-3">Afficher les rôles</button>
@@ -101,7 +100,6 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="mb-3">
 								<label for="registration_form_contact" class="form-label">Contact</label>
 								<div class="contact-container">
@@ -115,27 +113,35 @@
 								{{ form_widget(form.pays, {'attr': {'class':'form-control'}}) }}
 								<div class="text-danger">{{ form_errors(form.pays) }}</div>
 							</div>
-							<button type="submit" class="btn btn-primary">S'inscrire</button>
+
+							<div><input type="submit" class="btn btn-primary shadow" value="S'inscrire">
+								
+							</div>
 							{{ form_end(form) }}
+
+
+							<div class="text-center mt-5">
+								<p>
+									<a href="{{path('agent_welcome_index')}}">Retour à l'accueil</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</main>
+			</main>
 
-		{# Le script de Bootstrap 5 #}
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+			{# Le script de Bootstrap 5 #}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-		{# Votre code JavaScript sans utiliser {{ parent() }} #}
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script>
-			$(document).ready(function () {
+			{# Votre code JavaScript sans utiliser {{ parent() }} #}
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+			<script>
+				$(document).ready(function () {
 $('.toggle-roles').click(function () {
 $('.role-dropdown').slideToggle();
 });
 });
-		</script>
+			</script>
+		</body>
 	</body>
-
 </html>
-

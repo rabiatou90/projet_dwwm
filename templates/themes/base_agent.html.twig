@@ -50,7 +50,6 @@
 	</head>
 
 	<body>
-
 		{# La barre de navigation #}
 		<nav class="navbar navbar-expand-md">
 			<div class="container-fluid">
@@ -64,38 +63,38 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="{{path('agent_welcome_index')}}">Accueil</a>
+							<a class="nav-link active" aria-current="page" href="{{path('agent_welcome_index')}}" style="font-size: 2rem">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Qui sommes-nous?</a>
+							<a class="nav-link" href="#" style="font-size: 2rem">Qui sommes-nous?</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{path('agent_transfert_index')}}">Transfert</a>
+							<a class="nav-link" href="{{path('agent_transfert_index')}}" style="font-size: 2rem">Transfert</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" href="{{path('agent_contact_index')}}">Contact</a>
+							<a class="nav-link" href="{{path('agent_contact_index')}}" style="font-size: 2rem">Contact</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav ms-auto">
                     {% if app.user %}
                         {# Si un utilisateur est connecté #}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                            <a class="nav-link" href="{{ path('app_logout') }}" style="font-size: 2rem">Déconnexion</a>
                         </li>
                         {% if 'ROLE_ADMIN' in app.user.roles %}
                             {# Si l'utilisateur est administrateur #}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('agent_authentification_register') }}">Inscription</a>
+                                <a class="nav-link" href="{{ path('agent_authentification_register') }}" style="font-size: 2rem">Inscription</a>
                             </li>
                         {% endif %}
                     {% else %}
                         {# Si aucun utilisateur n'est connecté #}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('agent_authentification_login') }}">Connexion</a>
+                            <a class="nav-link" href="{{ path('agent_authentification_login') }}" style="font-size: 2rem">Connexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('agent_authentification_register') }}">Inscription</a>
+                            <a class="nav-link" href="{{ path('agent_authentification_register') }}" style="font-size: 2rem" >Inscription</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -107,8 +106,8 @@
 		{% block main %}{% endblock %}
 
 		{# Le pieds de page #}
-		<footer class="text-center">
-			<p>dbs</p>
+		<footer class="text-center footer-text-size">
+			<p style="font-size:2rem;">dbs</p>
 		</footer>
 
 		{# Le script de Bootstrap 5 #}
