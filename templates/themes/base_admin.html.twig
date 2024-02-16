@@ -42,7 +42,9 @@
 		href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital@1&display=swap" rel="stylesheet">
 
 		{# jQuery #}
-		{% block jQuery %}{% endblock %}
+		{% block jQuery %}
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		{% endblock %}
 
 		{# Datatables #}
 		{% block dataTables %}{% endblock %}
@@ -140,12 +142,12 @@
 										Tableau de bord
 									</a>
 								</li>
-								{# <li class="nav-item">
-								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_category_index')}}">
+								<li class="nav-item">
+								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_agence_index')}}">
 								                                    <i class="fa-solid fa-house"></i>
-								                                    Les catégories
+								                                    Les agences
 								                                </a>
-								                            </li> #}
+								                            </li>
 								{# <li class="nav-item">
 								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_post_index')}}">
 								                                    <i class="fa-solid fa-house"></i>

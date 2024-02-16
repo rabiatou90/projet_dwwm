@@ -1,0 +1,36 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Modifié cette agence{% endblock %}
+
+{% block description %}Modifié cette agence{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modifié cette agence</h1>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{ form_start(form) }}
+                <div class="mb-3">
+                    <label for="agence_form_pays">Pays</label>
+                    <div class="text-danger">{{form_errors(form.pays)}}</div>
+                    {{form_widget(form.pays, {"attr": {"class":"form-control", "autofocus":"autofocus"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="agence_form_ville">Ville</label>
+                    <div class="text-danger">{{form_errors(form.ville)}}</div>
+                    {{form_widget(form.ville, {'attr': {"class":"form-control"}}) }}
+                </div>
+                <div class="mb-3">
+                    <label for="agence_form_libelle">Libellé</label>
+                    {{form_widget(form.libelle, {'attr': {"class":"form-control"}}) }}
+                </div>
+                <div>
+                    <input formnovalidate type="submit" class="btn btn-primary shadow" value="Modifier">
+                </div>
+            {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
