@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20240223150222 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // Désactivation temporaire de la clé étrangère
+        $this->addSql('SET FOREIGN_KEY_CHECKS=0');
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE transfert CHANGE client_id client_id INT NOT NULL');
+
+         // Réactivation de la clé étrangère
+        $this->addSql('SET FOREIGN_KEY_CHECKS=1');
+    }
+
+    public function down(Schema $schema): void
+    {
+
+         // Temporairement désactiver la clé étrangère
+        $this->addSql('SET FOREIGN_KEY_CHECKS=0');
+
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE transfert CHANGE client_id client_id INT DEFAULT NULL');
+
+         // Réactivation de la clé étrangère
+        $this->addSql('SET FOREIGN_KEY_CHECKS=1');
+    }
+}

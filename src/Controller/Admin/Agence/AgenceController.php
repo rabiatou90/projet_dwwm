@@ -5,7 +5,6 @@ namespace App\Controller\Admin\Agence;
 use App\Entity\Agence;
 use App\Form\AgenceFormType;
 use App\Repository\AgenceRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

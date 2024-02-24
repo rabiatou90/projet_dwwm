@@ -112,7 +112,7 @@
 
 		{# Navbar #}
 		<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-			<a class="navbar-brand" href="{{path('agent_welcome_index')}}">
+			<a class="navbar-brand" href="{{path('visitor_welcome_index')}}">
 					<img class="custom-logo" style="max-width: 100px; height: auto;" src="{{ asset('images/logo/logo.jpeg') }}" alt="Logo">
 				</a>
 			<ul class="navbar-nav flex-row d-md-none">
@@ -154,6 +154,18 @@
 								                                    Gestion des agents 
 								                                </a>
 								                            </li>
+															<li class="nav-item">
+								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_transaction_index')}}">
+								                                    <i class="fa-solid fa-house"></i>
+								                                    Gestion des transactions 
+								                                </a>
+								                            </li>
+															<li class="nav-item">
+								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_contact_index')}}">
+								                                    <i class="fa-solid fa-house"></i>
+								                                    Les contacts
+								                                </a>
+								                            </li>
 							</ul>
 
 							<hr class="my-3">
@@ -161,7 +173,7 @@
 							<ul class="nav flex-column mb-auto">
 							
 								<li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2" href="{{path('agent_welcome_index')}}">
+									<a class="nav-link d-flex align-items-center gap-2" href="{{path('visitor_welcome_index')}}">
 										<i class="fa-solid fa-rotate-left"></i>
 										Retour au site
 									</a>

@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+
+<h2 class="text-center">Client</h2>
+{{ form_row(form.client.prenom) }}
+{{ form_row(form.client.nom) }}
+{{ form_row(form.client.adresse) }}
+{{ form_row(form.client.contact) }}
+
+<h2 class="text-center">Destinataire</h2>
+{{ form_row(form.destinataire.prenom) }}
+{{ form_row(form.destinataire.nom) }}
+{{ form_row(form.destinataire.adresse) }}
+{{ form_row(form.destinataire.contact) }}
+
+<h2 class="text-center">Transfert</h2>
+{{ form_row(form.transfert.montant_du_transfert) }}
+{{ form_row(form.transfert.frais_envoie) }}
+{{ form_row(form.transfert.montant_recu) }}
+{{ form_row(form.transfert.mode_de_retrait) }}
+{{ form_row(form.transfert.code_de_transfert) }}
+{{ form_row(form.transfert.moyen_de_paiement) }}
+
+<div>
+    <input formnovalidate type="submit" class="btn btn-primary shadow" value="Sauvegarder">
+</div>
+
+{{ form_end(form) }}

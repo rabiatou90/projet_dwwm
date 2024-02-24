@@ -1,0 +1,15 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Listes des transferts{% endblock %}
+
+{% block description %}Listes des transferts{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Listes des transactions</h1>
+
+    <div class="d-flex justify-content-end align-items-center my-3">
+		<a href="{{path('admin_transaction_create')}}" class="btn btn-primary shadow">
+			<i class="fas fa-plus"></i>
+			Nouvelle transaction</a>
+	</div>
+{% endblock %}
