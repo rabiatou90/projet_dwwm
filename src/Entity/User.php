@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -103,9 +105,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Transfert::class)]
+    private Collection $transferts;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Client::class)]
+    private Collection $clients;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Destinataire::class)]
+    private Collection $destinataires;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Agence::class)]
+    private Collection $agences;
+
     public function __construct()
     {
         $this->roles[] = "ROLE_USER";
+        $this->transferts = new ArrayCollection();
+        $this->clients = new ArrayCollection();
+        $this->destinataires = new ArrayCollection();
+        $this->agences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,5 +267,140 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->updatedAt;
     }
 
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transfert>
+     */
+    public function getTransferts(): Collection
+    {
+        return $this->transferts;
+    }
+
+    public function addTransfert(Transfert $transfert): static
+    {
+        if (!$this->transferts->contains($transfert)) {
+            $this->transferts->add($transfert);
+            $transfert->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransfert(Transfert $transfert): static
+    {
+        if ($this->transferts->removeElement($transfert)) {
+            // set the owning side to null (unless already changed)
+            if ($transfert->getUser() === $this) {
+                $transfert->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Client>
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): static
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients->add($client);
+            $client->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): static
+    {
+        if ($this->clients->removeElement($client)) {
+            // set the owning side to null (unless already changed)
+            if ($client->getUser() === $this) {
+                $client->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Destinataire>
+     */
+    public function getDestinataires(): Collection
+    {
+        return $this->destinataires;
+    }
+
+    public function addDestinataire(Destinataire $destinataire): static
+    {
+        if (!$this->destinataires->contains($destinataire)) {
+            $this->destinataires->add($destinataire);
+            $destinataire->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDestinataire(Destinataire $destinataire): static
+    {
+        if ($this->destinataires->removeElement($destinataire)) {
+            // set the owning side to null (unless already changed)
+            if ($destinataire->getUser() === $this) {
+                $destinataire->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Agence>
+     */
+    public function getAgences(): Collection
+    {
+        return $this->agences;
+    }
+
+    public function addAgence(Agence $agence): static
+    {
+        if (!$this->agences->contains($agence)) {
+            $this->agences->add($agence);
+            $agence->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgence(Agence $agence): static
+    {
+        if ($this->agences->removeElement($agence)) {
+            // set the owning side to null (unless already changed)
+            if ($agence->getUser() === $this) {
+                $agence->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }
+
