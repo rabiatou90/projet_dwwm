@@ -1,72 +1,42 @@
 {% extends "themes/base_admin.html.twig" %}
 
-{% block title %}Gestion des agents{% endblock %}
-{% block description %}Modifier cet agent{% endblock %}
+{% block title %}Modification des rôles{% endblock %}
+{% block description %}Modification des rôles{% endblock %}
+
+{# jQuery #}
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{# Beautiful replacement for select boxes #}
+{% block select2 %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#user_roles').select2();
+        });
+    </script>
+{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Modifier cet agent</h1>
+    <h1 class="text-center my-3 display-5">Modification des rôles</h1>
 
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 mx-auto">
                 {{ form_start(form) }}
                 <div class="mb-3">
-                    <label for="user_prenom">Prénom</label>
-                    <div class="text-danger">{{ form_errors(form.prenom) }}</div>
-                    {{ form_widget(form.prenom, {"attr": {"class": "form-control", "autofocus": "autofocus"}}) }}
-                </div>
-                <div class="mb-3">
-                    <label for="user_nom">Nom</label>
-                    <div class="text-danger">{{ form_errors(form.nom) }}</div>
-                    {{ form_widget(form.nom, {'attr': {"class": "form-control"}}) }}
-                </div>
-                <div class="mb-3">
-                    <label for="user_email">Email</label>
-                    <div class="text-danger">{{ form_errors(form.email) }}</div>
-                    {{ form_widget(form.email, {'attr': {"class": "form-control"}}) }}
-                </div>
-                <div class="mb-3">
-                    <label for="user_roles" class="user-label">Rôles</label>
-                    <button class="toggle-roles btn btn-primary mt-3" type="button">Afficher les rôles</button>
-                    <div class="role-dropdown" style="display: none;">
-                        <div class="user-group">
-                            {% for role in form.roles %}
-                                <div class="user-check">
-                                    {{ form_widget(role) }}
-                                    {{ form_label(role) }}
-                                </div>
-                            {% endfor %}
-                        </div>
+                        <label for="user_roles">Les rôles</label>
+                        <div class="text-danger">{{form_errors(form.roles)}}</div>
+                        {{form_widget(form.roles, {'attr': {'class': 'form-control', 'id': 'user_roles'}})}}
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="user_contact">Contact</label>
-                    <div class="text-danger">{{ form_errors(form.contact) }}</div>
-                    {{ form_widget(form.contact, {'attr': {"class": "form-control"}}) }}
-                </div>
-                <div class="mb-3">
-                    <label for="user_pays">Pays</label>
-                    <div class="text-danger">{{ form_errors(form.pays) }}</div>
-                    {{ form_widget(form.pays, {'attr': {"class": "form-control"}}) }}
-                </div>
-    {# <div>
-        <input formnovalidate type="submit" class="btn btn-primary shadow" value="Modifier">
-    </div> #}
-    {{ form_end(form) }}
+                <div>
+                        <input formnovalidate type="submit" class="btn btn-primary" value="Modifier">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
-    <a href="{{ path('admin_user_index') }}">Retour à la liste</a>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleRolesButton = document.querySelector('.toggle-roles');
-            const roleDropdown = document.querySelector('.role-dropdown');
-
-            toggleRolesButton.addEventListener('click', function() {
-                roleDropdown.style.display = roleDropdown.style.display === 'none' ? 'block' : 'none';
-            });
-        });
-    </script>
 {% endblock %}

@@ -1,27 +1,93 @@
-{{ form_start(form) }}
+{% extends 'themes/base_admin.html.twig' %}
 
-<h2 class="text-center">Client</h2>
-{{ form_row(form.client.prenom) }}
-{{ form_row(form.client.nom) }}
-{{ form_row(form.client.adresse) }}
-{{ form_row(form.client.contact) }}
+{% block title %}Nouvelle agence{% endblock %}
 
-<h2 class="text-center">Destinataire</h2>
-{{ form_row(form.destinataire.prenom) }}
-{{ form_row(form.destinataire.nom) }}
-{{ form_row(form.destinataire.adresse) }}
-{{ form_row(form.destinataire.contact) }}
+{% block description %}Nouvelle agence{% endblock %}
 
-<h2 class="text-center">Transfert</h2>
-{{ form_row(form.transfert.montant_du_transfert) }}
-{{ form_row(form.transfert.frais_envoie) }}
-{{ form_row(form.transfert.montant_recu) }}
-{{ form_row(form.transfert.mode_de_retrait) }}
-{{ form_row(form.transfert.code_de_transfert) }}
-{{ form_row(form.transfert.moyen_de_paiement) }}
+{% block main %}
+    <h1 class="text-center my-3 display-5">Nouvelle agence</h1>
 
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{ form_start(form) }}
+                <h2 class="text-center">Client</h2>
+                <div class="mb-3">
+                    <label for="">Prenom</label>
+                    <div class="text-danger">{{form_errors(form.client.prenom)}}</div>
+                    {{form_widget(form.client.prenom, {"attr": {"class":"form-control", "autofocus":"autofocus"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Nom</label>
+                    <div class="text-danger">{{form_errors(form.client.nom)}}</div>
+                    {{form_widget(form.client.nom, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Adresse</label>
+                    <div class="text-danger">{{form_errors(form.client.adresse)}}</div>
+                    {{form_widget(form.client.adresse, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Contact</label>
+                    <div class="text-danger">{{form_errors(form.client.contact)}}</div>
+                    {{form_widget(form.client.contact, {"attr": {"class":"form-control"}})}}
+                </div>
+                <h2 class="text-center">Destinataire</h2>
+                <div class="mb-3">
+                    <label for="">Prenom</label>
+                    <div class="text-danger">{{form_errors(form.destinataire.prenom)}}</div>
+                    {{form_widget(form.destinataire.prenom, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Nom</label>
+                    <div class="text-danger">{{form_errors(form.destinataire.nom)}}</div>
+                    {{form_widget(form.destinataire.nom, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Adresse</label>
+                    <div class="text-danger">{{form_errors(form.destinataire.adresse)}}</div>
+                    {{form_widget(form.destinataire.adresse, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Contact</label>
+                    <div class="text-danger">{{form_errors(form.destinataire.contact)}}</div>
+                    {{form_widget(form.destinataire.contact, {"attr": {"class":"form-control"}})}}
+                </div>
+                <h2 class="text-center">Transfert</h2>
+                <div class="mb-3">
+                    <label for="">Montant_du_transfert</label>
+                    <div class="text-danger">{{form_errors(form.transfert.montant_du_transfert)}}</div>
+                    {{form_widget(form.transfert.montant_du_transfert, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Frais d'envoie</label>
+                    <div class="text-danger">{{form_errors(form.transfert.frais_envoie)}}</div>
+                    {{form_widget(form.transfert.frais_envoie, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Montant reçu</label>
+                    <div class="text-danger">{{form_errors(form.transfert.montant_recu)}}</div>
+                    {{form_widget(form.transfert.montant_recu, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Mode de retrait</label>
+                    {{ form_widget(form.transfert.mode_de_retrait, {'label': 'Orange Money', 'attr': {'checked': 'checked'}}) }}
+                </div>
+                <div class="mb-3">
+                    <label for="">Code de transfert</label>
+                    <div class="text-danger">{{form_errors(form.transfert.code_de_transfert)}}</div>
+                    {{form_widget(form.transfert.code_de_transfert, {"attr": {"class":"form-control"}})}}
+                </div>
+                <div class="mb-3">
+                    <label for="">Moyen de paiement</label>
+                    <div class="text-danger">{{form_errors(form.transfert.moyen_de_paiement)}}</div>
+                    {{form_widget(form.transfert.moyen_de_paiement, {"attr": {"class":"form-control"}})}}
+                </div>
 <div>
     <input formnovalidate type="submit" class="btn btn-primary shadow" value="Sauvegarder">
 </div>
-
 {{ form_end(form) }}
+</div>
+</div>
+</div>
+{% endblock %}
