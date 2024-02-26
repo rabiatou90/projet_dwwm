@@ -22,10 +22,14 @@ class TransfertType extends AbstractType
             ->add('montant_du_transfert')
             ->add('frais_envoie')
             ->add('montant_recu')
-            ->add('mode_de_retrait', CheckboxType::class, [
-                'label' => 'Orange Money',
-                'data' => true, // Coché par défaut
-                'required' => false, // Le champ n'est pas obligatoire
+            ->add('mode_de_retrait', ChoiceType::class, [
+                'label' => 'Mode de retrait',
+                'choices' => [
+                    'Orange Money' => 'orange_money',
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'data' => 'orange_money', // Valeurs cochées par défaut
             ])
             
             ->add('code_de_transfert', TextType::class, [

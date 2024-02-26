@@ -136,7 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
@@ -201,7 +201,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(?string $prenom): static
     {
         $this->prenom = $prenom;
 
@@ -213,7 +213,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(?string $nom): static
     {
         $this->nom = $nom;
 
@@ -399,6 +399,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getRelatedEntitiesExceptAgence(): ArrayCollection
+    {
+        $relatedEntities = new ArrayCollection();
+
+        //  Toutes les entités sauf Agence
+        foreach ($this->getTransferts() as $transfert) {
+            $relatedEntities->add($transfert);
+        }
+
+        foreach ($this->getClients() as $client) {
+            $relatedEntities->add($client);
+        }
+
+        foreach ($this->getDestinataires() as $destinataire) {
+            $relatedEntities->add($destinataire);
+        }
+
+        return $relatedEntities;
     }
 
 

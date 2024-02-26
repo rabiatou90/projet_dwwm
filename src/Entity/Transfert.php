@@ -184,9 +184,9 @@ class Transfert
         return $this;
     }
 
-    public function generateCodeDeTransfert(): void
-    {
-        // Génération du code unique
-        $this->code_de_transfert = strtoupper(uniqid('TRANSFERT_', true));
-    }
+    // public function generateCodeDeTransfert(): void
+    // {
+    //     // Génération du code unique
+    //     $this->code_de_transfert = strtoupper(uniqid('TRANSFERT_', true));
+    // }
 }

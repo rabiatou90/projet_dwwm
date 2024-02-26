@@ -1,15 +1,17 @@
 <?php
+
 namespace App\Controller\Admin;
 
 
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Entity\ResetPasswordRequest;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin')]
 class UserController extends AbstractController
@@ -17,65 +19,60 @@ class UserController extends AbstractController
     #[Route('/user/list', name: 'admin_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
+        $users = $userRepository->findAll();
         return $this->render('pages/admin/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
         ]);
     }
 
-    #[Route('/new', name: 'admin_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/user/{id<\d+>}/edit/roles', name: 'admin_user_edit', methods: ['GET', 'PUT'])]
+    public function edit(User $user, Request $request, EntityManagerInterface $em): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        // Créez un nouveau formulaire avec seulement le champ 'roles'
+        $form = $this->createForm(UserType::class, $user, ['method' => 'PUT', 'validation_groups' => ['roles']]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
+            // Mise à jour des rôles
+            $em->persist($user);
+            $em->flush();
 
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
-        }
+            $this->addFlash("success", "Les rôles de {$user->getPrenom()} {$user->getNom()} ont été modifiés avec succès.");
 
-        return $this->render('pages/admin/user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'admin_user_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('pages/admin/user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'admin_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute("admin_user_index");
         }
 
         return $this->render('pages/admin/user/edit.html.twig', [
-            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'admin_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/admin/user/{id<\d+>}/delete', name: 'admin_user_delete', methods: ['DELETE'])]
+    public function delete(User $user, Request $request, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete_user_' . $user->getId(), $request->request->get('csrf_token'))) {
+            // Récupère les demandes de réinitialisation de mot de passe associées à l'utilisateur
+            $resetPasswordRequests = $em->getRepository(ResetPasswordRequest::class)->findBy(['user' => $user]);
+            // Récupère toutes les entités liées, à l'exception de l'entité Agence
+            $relatedEntities = $user->getRelatedEntitiesExceptAgence();
+
+            // Supprime les demandes de réinitialisation de mot de passe associées
+            foreach ($resetPasswordRequests as $resetPasswordRequest) {
+                $em->remove($resetPasswordRequest);
+            }
+
+            // Supprime manuellement toutes les entités liées
+            foreach ($relatedEntities as $relatedEntity) {
+                $em->remove($relatedEntity);
+            }
+
+            $this->addFlash('success', "{$user->getPrenom()} {$user->getNom()} a été supprimé!");
+
+            $em->remove($user);
+            $em->flush();
         }
 
-        return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_user_index');
     }
 }
