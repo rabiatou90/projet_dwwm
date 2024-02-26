@@ -1,32 +1,30 @@
 <?php
 
-namespace App\Controller\Admin\Profile;
+namespace App\Controller\User\Profile;
 
-use App\Form\EditUserProfileFormType;
 use App\Form\EditUserPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Loader\Configurator\form;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/admin/profile', name: 'admin_profile_index', methods:['GET'])]
+    #[Route('/user/profile/', name: 'user_profile_index', methods:['GET'])]
     public function index(): Response
     {
-        return $this->render('pages/admin/profile/index.html.twig');
+        return $this->render('pages/user/profile/index.html.twig');
     }
 
-    #[Route('/admin/profile/edit', name: 'admin_profile_edit', methods:['GET', 'PUT'])]
+    #[Route('/user/profile/edit', name: 'user_profile_edit', methods:['GET', 'PUT'])]
     public function editProfile(Request $request, EntityManagerInterface $em): Response
     {
 
-        $admin = $this->getUser();
+        $user = $this->getUser();
 
-        $form = $this->createForm(EditUserProfileFormType::class, $admin, [
+        $form = $this->createForm(EditUserProfileFormType::class, $user, [
             "method" => "PUT"
         ]);
 
@@ -34,24 +32,25 @@ class ProfileController extends AbstractController
 
         if ( $form->isSubmitted() && $form->isValid() ) 
         {
-            $em->persist($admin);
+            $em->persist($user);
             $em->flush();
 
             $this->addFlash('success', "Le profil a été modifié");
 
-            return $this->redirectToRoute("admin_profile_index");
+            return $this->redirectToRoute("user_profile_index");
         }
 
-        return $this->render('pages/admin/profile/edit_profile.html.twig', [
+        return $this->render('pages/user/profile/edit_profile.html.twig', [
             "form" => $form->createView()
         ]);
     }
-    
-    #[Route('/admin/profile/edit/password', name: 'admin_profile_edit_password', methods:['GET', 'PUT'])]
+
+
+    #[Route('/user/profile/edit/password', name: 'user_profile_edit_password', methods:['GET', 'PUT'])]
     public function editPassword(Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $em): Response
     {
 
-        $admin = $this->getUser();
+        $user = $this->getUser();
 
         $form = $this->createForm(EditUserPasswordFormType::class, null, [
             "method" => "PUT"
@@ -60,55 +59,45 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ( $form->isSubmitted() && $form->isValid() ) 
-        {   
-            // dd($form->getData()["plainPassword"]);
+        {
             $plainPasssword = $form->getData()['plainPassword'];
 
-            $passwordHashed = $hasher->hashPassword($admin, $plainPasssword);
-            $admin->setPassword($passwordHashed);
+            $passwordHashed = $hasher->hashPassword($user, $plainPasssword);
 
-            $em->persist($admin);
+            $user->setPassword($passwordHashed);
+
+            $em->persist($user);
             $em->flush();
 
             $this->addFlash('success', 'Le mot de passe a été modifié.');
 
-            return $this->redirectToRoute('admin_profile_index');
+            return $this->redirectToRoute('user_profile_index');
         }
 
-        return $this->render('pages/admin/profile/edit_password.html.twig', [
+        return $this->render('pages/user/profile/edit_password.html.twig', [
             "form" => $form->createView()
         ]);
     }
-    
-    #[Route('/admin/profile/delete', name: 'admin_profile_delete', methods:['DELETE'])]
+
+
+    #[Route('/user/profile/delete', name: 'user_profile_delete', methods:['DELETE'])]
     public function delete(Request $request, EntityManagerInterface $em): Response
     {
         if ( $this->isCsrfTokenValid('delete_profile', $request->request->get('csrf_token')) ) 
         {
-            $admin = $this->getUser();
+            $user = $this->getUser();
 
-            $this->addFlash('success', "{$admin->getPrenom()} {$admin->getNom()} a été supprimé!");
+            $this->addFlash('success', "{$user->getPrenom()} {$user->getNom()} a été supprimé!");
 
-            // $posts = $admin->getPosts();
-
-            // foreach ($posts as $post) 
-            // {
-            //     $post->setUser(null);
-            // }
 
             $this->container->get('security.token_storage')->setToken(null);
 
-            $em->remove($admin);
+            $em->remove($user);
             $em->flush();
 
         }
         
-        return $this->redirectToRoute('admin_profile_index');
+        return $this->redirectToRoute('user_profile_index');
         
     }
-
-        
-    }
-
-
-
+}
