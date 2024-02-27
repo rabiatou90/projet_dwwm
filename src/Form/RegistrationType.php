@@ -18,17 +18,6 @@ class RegistrationType extends AbstractType
             ->add('prenom',TextType::class)
             ->add('nom',TextType::class)
             ->add('email', EmailType::class)
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'User' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
-                ],
-                'expanded' => true,
-                'multiple' => true,
-                'attr' => [
-                    'class' => 'form-check-input',
-                ],
-            ])
             ->add('contact', TextType::class)
             ->add('pays', TextType::class)
         ;
@@ -41,3 +30,4 @@ class RegistrationType extends AbstractType
         ]);
     }
 }
+
