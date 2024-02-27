@@ -6,6 +6,47 @@
 
 {% block main %}
     <main>
-    <h1>Accueil</h1>
+    <header>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-6 col-lg-5 order-md-2">
+                <img src="{{asset('images/visitor/welcome/transaction/transaction.png')}}" class="img-fluid" alt="transaction en ligne">
+                </div>
+                <div class="col-md-6 col-lg-7 order-md-1 mt-5 d-flex flex-column justify-content-evenly align-items-center">
+                <div>
+                    <h1>
+                        Bienvenue sur le site DBS
+                    </h1>
+                </div>
+                <div>
+                    <p>La plateforme de transfert d'argent en ligne qui simplifie vos transactions financières. </p>
+                    <p>Nous comprenons l'importance de pouvoir envoyer de l'argent rapidement, en toute sécurité et à moindre coût.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about-me-section">
+        <h1 class="text-center my-3 display-5">Qui sommes-nous ?</h1>
+
+        <div class="container my-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{asset('images/visitor/welcome/about_me/about_me.png')}}" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 d-flex flex-column justify-content-evenly align-items-center">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati impedit nesciunt rerum ab consequuntur laborum dignissimos quidem delectus! Nihil quasi ab enim voluptates quae, laboriosam blanditiis sequi saepe, debitis consectetur a inventore. Odit id quidem nihil dicta eius veritatis.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati impedit nesciunt rerum ab consequuntur laborum dignissimos quidem delectus! Nihil quasi ab enim voluptates quae, laboriosam blanditiis sequi saepe, debitis consectetur a inventore. Odit id quidem nihil dicta eius veritatis.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati impedit nesciunt rerum ab consequuntur laborum dignissimos quidem delectus! Nihil quasi ab enim voluptates quae, laboriosam blanditiis sequi saepe, debitis consectetur a inventore. Odit id quidem nihil dicta eius veritatis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </section>
     </main>
 {% endblock %}
