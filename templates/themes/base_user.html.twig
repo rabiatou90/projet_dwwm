@@ -8,9 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		{# Le titre de chaque page dans l'onglet #}
-		<title>
-			{% block title %}{% endblock %}Espace privé 
-															- Le site de transfert d'argent DBS</title>
+		<title>{% block title %}{% endblock %}Espace privé - Le site de transfert d'argent DBS</title>
 
 		{# La description de chaque page #}
 		<meta name="description" content="{% block description %}{% endblock %}">
@@ -46,7 +44,7 @@
         
 
         {# La barre de navigation #}
-		<nav class="navbar navbar-expand-lg" style="background-color: #FF261A";>
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{path('visitor_welcome_index')}}">
 					<img class="custom-logo" style="max-width: 100px; height: auto;" src="{{ asset('images/logo/logo.jpeg') }}" alt="Logo">
@@ -84,11 +82,9 @@
 			</div>
 		</nav>
 
-		<main class="container-fluid" role="alert"> 
-		{% block main %}{% endblock %}
-		</main>
+		<main class="container-fluid" role="alert"> {% block main %}{% endblock %}</main>
 
-        <footer class="text-center" style="background-color: #FF261A";>
+        <footer class="text-center">
             <p>DBS</p>
         </footer>
 

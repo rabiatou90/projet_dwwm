@@ -86,27 +86,11 @@
 								<div class="text-danger">{{ form_errors(form.email) }}</div>
 							</div>
 
-							{# <div class="mb-3">
-								<label for="registration_form_roles" class="form-label">Rôles</label>
-								<button class="toggle-roles btn btn-primary mt-3">Afficher les rôles</button>
-								<div class="role-dropdown" style="display: none;">
-									<div class="form-group">
-										{% for role in form.roles %}
-											<div class="form-check">
-												{{ form_widget(role) }}
-												{{ form_label(role) }}
-											</div>
-										{% endfor %}
-									</div> #}
-								</div>
-							</div>
 							<div class="mb-3">
 								<label for="registration_form_contact" class="form-label">Contact</label>
-								<div class="contact-container">
 									{{ form_widget(form.contact, {'attr': {'class':'form-control'}}) }}
 									<div class="text-danger">{{ form_errors(form.contact) }}</div>
 								</div>
-							</div>
 
 							<div class="mb-3">
 								<label for="registration_form_pays" class="form-label">Pays</label>
@@ -115,7 +99,7 @@
 							</div>
 
 							<div>
-							    <input formnovalidate type="submit" class="btn btn-primary shadow" value="S'inscrire">
+							    <input formnovalidate type="submit" class="btn btn-primary shadow" value="Inscription">
 								
 							</div>
 							{{ form_end(form) }}
