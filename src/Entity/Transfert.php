@@ -31,8 +31,9 @@ class Transfert
     
     #[ORM\Column(length: 255)]
     private ?string $mode_de_retrait = null;
-
-    #[ORM\Column(length: 255)]
+    
+    #[Assert\NotNull(message: "Le code de transfert ne doit pas être vide.")]
+    #[ORM\Column(length:255)]
     private ?string $code_de_transfert = null;
     
     
@@ -184,9 +185,13 @@ class Transfert
         return $this;
     }
 
-    // public function generateCodeDeTransfert(): void
-    // {
-    //     // Génération du code unique
-    //     $this->code_de_transfert = strtoupper(uniqid('TRANSFERT_', true));
-    // }
+    
+    
+    public function generateCodeDeTransfert(): void
+    {
+        // Génération du code unique seulement si le champ est actuellement null
+        if ($this->code_de_transfert === null) {
+            $this->code_de_transfert = strtoupper(bin2hex(random_bytes(16)));
+        }
+    }
 }

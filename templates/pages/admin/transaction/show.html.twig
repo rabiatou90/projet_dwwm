@@ -1,0 +1,32 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Détails de la transaction{% endblock %}
+
+{% block description %}Détails de la transaction{% endblock %}
+
+
+
+{% block main %}
+	<h1 class="text-center my-3 display-5">Détails de la transaction</h1>
+
+        {# show.html.twig #}
+<dl>
+    <dt>ID du transfert</dt>
+    <dd>{{ transactionData.data.transfert.id }}</dd>
+
+    <dt>Montant du transfert</dt>
+    <dd>{{ transactionData.data.transfert.montant_du_transfert }}</dd>
+
+    <dt>Client</dt>
+    <dd>{{ transactionData.data.client.prenom }} {{ transactionData.data.client.nom }}</dd>
+
+    <dt>Destinataire</dt>
+    <dd>{{ transactionData.data.destinataire.prenom }} {{ transactionData.data.destinataire.nom }}</dd>
+    {# Ajoutez d'autres champs selon vos besoins #}
+</dl>
+
+    
+    
+        
+
+{% endblock %}
