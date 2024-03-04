@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<lang="fr">
+<html lang="fr" data-bs-theme="auto">
 	<head>
 		{# L'encodage des caractères #}
 		<meta
@@ -42,9 +42,7 @@
 		href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital@1&display=swap" rel="stylesheet">
 
 		{# jQuery #}
-		{% block jQuery %}
-		    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		{% endblock %}
+		{% block jQuery %}{% endblock %}
 
 		{# Datatables #}
 		{% block dataTables %}{% endblock %}
@@ -111,22 +109,21 @@
 	<body>
 
 		{# Navbar #}
-		<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+		<header class="navbar sticky-top bg-danger flex-md-nowrap p-0 shadow" data-bs-theme="dark">
 			<a class="navbar-brand" href="{{path('visitor_welcome_index')}}">
 					<img class="custom-logo" style="max-width: 100px; height: auto;" src="{{ asset('images/logo/logo.jpeg') }}" alt="Logo">
 				</a>
 			<ul class="navbar-nav flex-row d-md-none">
 				<li class="nav-item text-nowrap">
-					<button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-						<i class="fa-solid fa-bars"></i>
-					</button>
+					<button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas"       data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"  aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars"></i>
+                    </button>
 				</li>
 			</ul>
 		</header>
 
 		<div class="container-fluid">
-			<div
-				class="row">
+			<div class="row">
 
 				{# Sidebar #}
 				<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
@@ -137,10 +134,10 @@
 						<div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
 							<ul class="nav flex-column">
 								<li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_home_index')}}">
-										<i class="fa-solid fa-house"></i>
-										Tableau de bord
-									</a>
+									<a class="text-dark nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{path('admin_home_index')}}">
+                                    <i class="fa-solid fa-house"></i>
+                                    Tableau de bord
+                                </a>
 								</li>
 								<li class="nav-item">
 								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_agence_index')}}">
@@ -149,19 +146,19 @@
 								                                </a>
 								                            </li>
 								<li class="nav-item">
-								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_user_index')}}">
+								                                <a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('admin_user_index')}}">
 								                                    <i class="fa-solid fa-house"></i>
 								                                    Gestion des agents 
 								                                </a>
 								                            </li>
 															<li class="nav-item">
-								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_transaction_index')}}">
+								                                <a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('admin_transaction_index')}}">
 								                                    <i class="fa-solid fa-house"></i>
 								                                    Gestion des transactions 
 								                                </a>
 								                            </li>
 															<li class="nav-item">
-								                                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('admin_contact_index')}}">
+								                                <a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('admin_contact_index')}}">
 								                                    <i class="fa-solid fa-house"></i>
 								                                    Les contacts
 								                                </a>
@@ -173,27 +170,27 @@
 							<ul class="nav flex-column mb-auto">
 
 							    <li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2" href="{{path('admin_profile_index')}}">
+									<a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('admin_profile_index')}}">
 										<i class="fa-solid fa-rotate-left"></i>
 										Mon profil
 									</a>
 								</li>
 							
 								<li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2" href="{{path('visitor_welcome_index')}}">
+									<a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('visitor_welcome_index')}}">
 										<i class="fa-solid fa-rotate-left"></i>
 										Retour au site
 									</a>
 								</li>
 								
 								<li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="{{path('user_home_index')}}">
+                                <a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('user_home_index')}}">
                                     <i class="fa-solid fa-rotate-left"></i>
-                                    Espace privé
+                                    Espace utilisateur
                                 </a>
                             </li>
 								<li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2" href="{{path('app_logout')}}">
+									<a class="text-dark nav-link d-flex align-items-center gap-2" href="{{path('app_logout')}}">
 										<i class="fa-solid fa-right-from-bracket"></i>
 										Déconnexion
 									</a>
@@ -203,7 +200,8 @@
 					</div>
 				</div>
 
-				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> {% block main %}{% endblock %}
+				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> 
+				{% block main %}{% endblock %}
 					</main>
 				</div>
 			</div>

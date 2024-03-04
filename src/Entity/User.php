@@ -21,7 +21,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-
+    
+    #[Assert\NotBlank(groups: ["creation"])]
     #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
     #[Assert\Length(
         max: 255,
@@ -117,6 +118,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Agence::class)]
     private Collection $agences;
 
+    #[ORM\ManyToMany(targetEntity: Agence::class, inversedBy: 'users')]
+    private Collection $relation;
+
     public function __construct()
     {
         $this->roles[] = "ROLE_USER";
@@ -124,6 +128,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->clients = new ArrayCollection();
         $this->destinataires = new ArrayCollection();
         $this->agences = new ArrayCollection();
+        $this->relation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -419,6 +424,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $relatedEntities;
+    }
+
+    /**
+     * @return Collection<int, Agence>
+     */
+    public function getRelation(): Collection
+    {
+        return $this->relation;
+    }
+
+    public function addRelation(Agence $relation): static
+    {
+        if (!$this->relation->contains($relation)) {
+            $this->relation->add($relation);
+        }
+
+        return $this;
+    }
+
+    public function removeRelation(Agence $relation): static
+    {
+        $this->relation->removeElement($relation);
+
+        return $this;
     }
 
 

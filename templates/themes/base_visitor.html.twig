@@ -74,7 +74,7 @@
 							<a class="nav-link {{ clientUri == path('visitor_welcome_index') ? 'jd-active' : '' }}" {{ clientUri == path('visitor_welcome_index') ? 'aria-current="page"' : '' }} href="{{path('visitor_welcome_index')}}">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a <a class="nav-link" href="{{path('visitor_welcome_index')}}#about-me-section">Qui sommes-nous?</a>
+							<a class="nav-link" href="{{path('visitor_welcome_index')}}#about-me-section">Qui sommes-nous?</a>
 						</li>
 						
 						<li class="nav-item">
@@ -85,46 +85,82 @@
                     {% if app.user %}
 					    {% if is_granted('ROLE_ADMIN') %}
 						    <li class="nav-item">
-							    <a class="my-2 mx-lg-2" href="{{path('admin_home_index')}}">Espace admin</a>
+							    <a class="my-2 mx-lg-2 btn btn-outline-primary shadow" href="{{path('admin_home_index')}}">Espace admin</a>
 							</li>
 						{% endif %}
 
 					{% if is_granted('ROLE_USER') %}
 						    <li class="nav-item">
-							    <a class="my-2 mx-lg-2" href="{{path('user_home_index')}}">Espace user</a>
+							    <a class="my-2 mx-lg-2 btn btn-primary shadow" href="{{path('user_home_index')}}">Espace user</a>
 							</li>
 						{% endif %}
                         {# Si un utilisateur est connecté #}
                         <li class="nav-item">
-                            <a class="my-2 mx-lg-2" href="{{ path('app_logout') }}">Déconnexion</a>
+                            <a class="my-2 mx-lg-2 btn btn-outline-primary shadow" href="{{ path('app_logout') }}">Déconnexion</a>
                         </li>
                         {% if 'ROLE_ADMIN' in app.user.roles %}
                             {# Si l'utilisateur est administrateur #}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('visitor_authentification_register') }}" >Inscription</a>
+                                <a class="my-2 mx-lg-2 btn btn-primary shadow" href="{{ path('visitor_authentification_register') }}" >Inscription</a>
                             </li>
                         {% endif %}
                     {% else %}
                         {# Si aucun utilisateur n'est connecté #}
                         <li class="nav-item">
-                            <a class="my-2 mx-lg-2 btn btn-outline-primary shadow" href="{{ path('visitor_authentification_login') }}">Connexion</a>
+                            <a class="my-2 mx-lg-2 btn btn-primary shadow" href="{{ path('visitor_authentification_login') }}">Connexion</a>
                         </li>
-                        {# <li class="nav-item">
-                            <a class="my-2 mx-lg-2 btn btn-primary shadow" href="{{ path('visitor_authentification_register') }}" >Inscription</a>
-                        </li> #}
+                        
                     {% endif %}
                 </ul>
 				</div>
 			</div>
 		</nav>
     
-		{# Le contenu spécifique à chaque page #} 
+		{# Le contenu spécifique à chaque page #}
 		{% block main %}{% endblock %}
 
 		{# Le pieds de page #}
-		<footer class="text-center";>
-			<p>dbs</p>
+		<footer class="bg-primary text-white text-center py-2">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<p class="fs-5">Dow Bolol Services</p>
+						<hr>
+						<p class="cursor-pointer"><a href="{{path('visitor_welcome_index')}}#about-me-section" class="text-decoration-none text-white">Qui suis-je ?</a></p>
+						<p class="cursor-pointer"><a href="{{path('visitor_contact_create')}}" class="text-decoration-none text-white">Contactez-moi</a></p>
+					</div>
+					
+					<div class="col-md-6">
+						<p class="fs-5">DWWM</p>
+						<hr>
+						<p class="cursor-pointer"><a data-bs-toggle="modal" data-bs-target="#agreeTermsModal" href="#" class="text-decoration-none text-white">Les conditions générales d'utilisation</a></p>
+						<!-- Modal -->
+						<div class="text-dark modal fade" id="agreeTermsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">                         
+							<div class="modal-dialog modal-dialog-scrollable">
+								<div class="modal-content ">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="exampleModalLabel">Les conditions générales d'utilisation</h1>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<p>
+											Qu'est-ce que le Lorem Ipsum? Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
+										</p>
+										<p>
+											Pourquoi l'utiliser? On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte. Du texte. Du texte.' est qu'il possède une distribution de lettres plus ou moins normale, et en tout cas comparable avec celle du français standard. De nombreuses suites logicielles de mise en page ou éditeurs de sites Web ont fait du Lorem Ipsum leur faux texte par défaut, et une recherche pour 'Lorem Ipsum' vous conduira vers de nombreux sites qui n'en sont encore qu'à leur phase de construction. Plusieurs versions sont apparues avec le temps, parfois par accident, souvent intentionnellement (histoire d'y rajouter de petits clins d'oeil, voire des phrases embarassantes).
+										</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</footer>
+		{% block javascript %}{% endblock %}
 	</body>
 
 </html>

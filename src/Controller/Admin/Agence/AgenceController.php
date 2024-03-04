@@ -72,21 +72,18 @@ class AgenceController extends AbstractController
             "form" => $form->createView()
         ]);
     }
-
-    #[Route('/admin/agence/{id}/delete', name: 'admin_agence_delete', methods:['DELETE'])]
-    public function delete (Agence $agence, Request $request, EntityManagerInterface $em): Response 
+    
+    #[Route('/admin/agence/delete/{id}', name: 'admin_agence_delete', methods: ['DELETE'])]
+    public function delete(Agence $agence, EntityManagerInterface $em): Response
     {
-        
-        if ( $this->isCsrfTokenValid('delete_agence_'.$agence->getId(), $request->request->get('csrf_token')) ) 
-        {
-            $em->remove($agence);
-            $em->flush();
+        $em->remove($agence);
+        $em->flush();
 
-            $this->addFlash('success', "L'agence a été supprimée.");
-        }
-        
+        $this->addFlash('success', "L'agence a été supprimée avec succès.");
+
         return $this->redirectToRoute('admin_agence_index');
     }
+
     }
     
 

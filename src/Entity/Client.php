@@ -17,6 +17,9 @@ class Client
     #[ORM\Column]
     private ?int $id = null;
     
+
+    #[Assert\NotBlank(groups: ["creation"])]
+    
     #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
     #[Assert\Length(
         max: 255,

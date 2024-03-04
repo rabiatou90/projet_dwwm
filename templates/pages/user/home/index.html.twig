@@ -6,6 +6,22 @@
 
 {% block main %}
     <main>
-        <h1 class="text-center">Espace agent</h1>
+        <h1 class="text-center my-3 display-5">Bonjour {{app.user.prenom}} {{app.user.nom}} </h1>
+
+        {# <div class="container my-5">
+            <div class="row">
+
+                <div class="col-md-3 d-flex justify-content-center align-items-center my-3">
+                <div class="card text-bg-light my-3 w-100 h-100">
+                    <a class="text-decoration-none text-dark" href="{{path('admin_transaction_index')}}">
+                        <div class="card-header">Les transactions</div>
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">{{agences|length}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> #}
     </main>
 {% endblock %}
